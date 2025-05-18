@@ -5,6 +5,7 @@ plugins {
 android {
     namespace = "com.servicetest"
     compileSdk = 35
+    ndkVersion = "28.1.13356709"
 
     defaultConfig {
         applicationId = "com.servicetest"
@@ -14,6 +15,21 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        ndk {
+            abiFilters.add("arm64-v8a")
+        }
+
+        externalNativeBuild {
+            cmake {
+                cppFlags += ""
+                arguments += "-DANDROID_STL=c++_shared"
+            }
+        }
+    }
+
+    sourceSets.getByName("main") {
+        jniLibs.srcDirs("lib")
     }
 
     buildTypes {
@@ -35,7 +51,6 @@ android {
 }
 
 dependencies {
-
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
