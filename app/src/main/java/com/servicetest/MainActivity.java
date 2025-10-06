@@ -34,7 +34,9 @@ public class MainActivity extends AppCompatActivity {
             Log.v("TAG", "native library dir " + ainfo.nativeLibraryDir);
 
             NativeWrapper nativeWrapper = new NativeWrapper();
-            nativeWrapper.createLogicalObject();
+            nativeWrapper.open();
+
+//            nativeWrapper.createLogicalObject();
 
         } catch (PackageManager.NameNotFoundException e) {
             throw new RuntimeException(e);

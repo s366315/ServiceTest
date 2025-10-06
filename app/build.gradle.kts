@@ -1,5 +1,3 @@
-import org.gradle.kotlin.dsl.internal.sharedruntime.codegen.sourceNameOfBinaryName
-
 plugins {
     alias(libs.plugins.android.application)
 }
@@ -8,6 +6,16 @@ android {
     namespace = "com.servicetest"
     compileSdk = 35
     ndkVersion = "26.1.10909125"
+
+    packagingOptions.jniLibs.useLegacyPackaging = true
+
+    lint {
+        abortOnError = false
+    }
+
+    androidResources {
+        noCompress += "rcc"
+    }
 
     defaultConfig {
         applicationId = "com.servicetest"
@@ -26,6 +34,7 @@ android {
             cmake {
                 cppFlags += ""
                 arguments += "-DANDROID_STL=c++_shared"
+                arguments += "QT_ANDROID_EXTRA_LIBS=libcrypto.so;libssl.so"
             }
         }
     }
@@ -59,9 +68,8 @@ android {
 }
 
 dependencies {
-//    implementation("com.android.ndk.thirdparty:openssl:1.1.1q-beta-1")
-//    implementation("com.android.ndk.thirdparty:curl:7.79.1-beta-1")
-//    implementation("com.android.ndk.thirdparty:jsoncpp:1.9.5-beta-1")
+    implementation(fileTree("lib/arm64-v8a") { include("*.jar", "*.aar") })
+    implementation(fileTree("lib") { include("*.jar", "*.aar") })
     implementation(libs.appcompat)
     implementation(libs.material)
     implementation(libs.constraintlayout)
