@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.os.IBinder;
 
 import androidx.annotation.Nullable;
-import androidx.core.app.NotificationCompat;
 
 public class MainService extends Service {
     private int duration = Integer.MAX_VALUE;
@@ -26,7 +25,7 @@ public class MainService extends Service {
         Intent notificationIntent = new Intent(this, MainActivity.class);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, notificationIntent, PendingIntent.FLAG_IMMUTABLE);
 
-        Notification notification = new NotificationCompat.Builder(this, notificationChannelID)
+        Notification notification = new Notification.Builder(this, notificationChannelID)
                 .setContentTitle("Заголовок")
                 .setContentText("Описание")
                 .setSmallIcon(R.drawable.ic_launcher_foreground)

@@ -34,13 +34,12 @@ android {
             cmake {
                 cppFlags += ""
                 arguments += "-DANDROID_STL=c++_shared"
-                arguments += "QT_ANDROID_EXTRA_LIBS=libcrypto.so;libssl.so"
             }
         }
     }
     externalNativeBuild {
         cmake {
-//            path("src/main/cpp/CMakeLists.txt")
+            path("src/main/cpp/CMakeLists.txt")
         }
     }
 
@@ -68,13 +67,14 @@ android {
 }
 
 dependencies {
+    implementation("com.squareup.okhttp3:okhttp:5.1.0")
     implementation(fileTree("lib/arm64-v8a") { include("*.jar", "*.aar") })
     implementation(fileTree("lib") { include("*.jar", "*.aar") })
-    implementation(libs.appcompat)
-    implementation(libs.material)
-    implementation(libs.constraintlayout)
-    implementation(libs.navigation.fragment)
-    implementation(libs.navigation.ui)
+//    implementation(libs.appcompat)
+//    implementation(libs.material)
+//    implementation(libs.constraintlayout)
+//    implementation(libs.navigation.fragment)
+//    implementation(libs.navigation.ui)
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
